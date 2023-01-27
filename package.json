@@ -1,0 +1,23 @@
+{
+  "name": "fastapi-strawberry-urql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmgraff/fastapi-strawberry-urql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmgraff/fastapi-strawberry-urql/issues"
+  },
+  "homepage": "https://github.com/jmgraff/fastapi-strawberry-urql#readme",
+  "description": "",
+  "dependencies": {
+    "create-react-app": "^5.0.1"
+  }
+}

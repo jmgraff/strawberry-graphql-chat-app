@@ -1,0 +1,7 @@
+services:
+  backend:
+    volumes:
+      - ./backend:/opt/container
+  frontend:
+    volumes:
+      - ./frontend:/opt/container

@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: backend
+    build: backend
+    ports:
+      - 8000:8000
+    environment:
+      - HOSTNAME=${HOSTNAME}
+      - PROD=${PROD}
+  frontend:
+    image: frontend
+    build: frontend
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_HOSTNAME=${HOSTNAME}
+      - PROD=${PROD}
