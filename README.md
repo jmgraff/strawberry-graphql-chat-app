@@ -1,9 +1,10 @@
-# FastAPI, Strawberry, React, URQL Project Template
+# Strawberry GraphQL Real-Time Chat Application
 
-This project is meant to be a starting point for future GraphQL projects.
+Based on the template repo found here:
+https://github.com/jmgraff/fastapi-strawberry-urql
 
-An in-depth article explaining this code is available on codehammer.io:
-https://codehammer.io/full-stack-graphql-example-fastapi-strawberry-and-urql
+This project illustratres how to use Subscriptions in GraphQL to create
+real-time web apps that don't need to use polling.
 
 ## Requiremets
 
