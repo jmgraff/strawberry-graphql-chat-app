@@ -5,7 +5,7 @@ from strawberry.fastapi import GraphQLRouter
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from gql import Query, Mutation
+from gql import Query, Subscription, Mutation
 
 app = FastAPI()
 
@@ -17,7 +17,7 @@ app.add_middleware(
             allow_headers=["*"]
         )
 
-schema = strawberry.Schema(query=Query, mutation=Mutation)
+schema = strawberry.Schema(query=Query, subscription=Subscription, mutation=Mutation)
 app.include_router(GraphQLRouter(schema), prefix="/graphql")
 
 if __name__ == "__main__":

@@ -1,13 +1,13 @@
 import { Provider } from "urql";
 import { urqlClient } from "./utils";
 
-import Message from "./Message";
+import Room from "./Room";
 import MessageForm from "./MessageForm";
 
 function App() {
     return (
         <Provider value={urqlClient}>
-            <Message />
+            <Room />
             <MessageForm />
         </Provider>
     );

@@ -1,0 +1,17 @@
+#messages {
+    overflow: auto;
+    max-height: 10rem;
+    height: 10rem;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 1rem;
+}
+
+.message {
+    display: flex;
+}
+
+.message .sender {
+    font-weight: bold;
+    margin-right: .5rem;
+}
