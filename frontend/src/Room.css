@@ -1,7 +1,7 @@
 #messages {
     overflow: auto;
     max-height: 10rem;
-    height: 10rem;
+    height: 5rem;
     display: flex;
     flex-direction: column-reverse;
     padding-bottom: 1rem;

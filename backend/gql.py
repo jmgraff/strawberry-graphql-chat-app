@@ -1,7 +1,6 @@
-import uuid
+from uuid import uuid4
 import typing
 import asyncio
-from datetime import datetime
 
 import strawberry
 
@@ -10,24 +9,39 @@ class User:
     uuid: strawberry.Private[str]
     name: str
 
-
 @strawberry.type
 class Message:
-    time: datetime
     sender: User
     text: str
 
 @strawberry.type
 class Room:
-    changed: strawberry.Private[typing.Optional[asyncio.Event]] = None
+    updated: strawberry.Private[typing.Optional[asyncio.Event]] = None
     name: str = "Example Chat"
     users: typing.List[User]
     messages: typing.List[Message]
 
     def get_user_by_uuid(self, uuid):
-        print(f"Searching for user {uuid}")
-        print(f"Users: {self.users}")
         return next(user for user in self.users if user.uuid == uuid)
+
+    def add_user(self, name):
+        uuid = str(uuid4())
+        room.users.append(User(name=name, uuid=uuid))
+        return uuid
+
+    def add_message(self, uuid, text):
+        self.messages.append(Message(
+            sender=self.get_user_by_uuid(uuid),
+            text=text
+        ))
+        self.updated.set()
+        self.updated.clear()
+        return self
+
+    async def wait_for_update(self):
+        if self.updated is None:
+            self.updated = asyncio.Event()
+        await self.updated.wait()
 
 room = Room(users=[], messages=[])
 
@@ -41,27 +55,16 @@ class Query:
 class Subscription:
     @strawberry.subscription
     async def room() -> typing.AsyncGenerator[Room, None]:
-        if room.changed is None:
-            room.changed = asyncio.Event()
         while True:
             yield await Query.get_room()
-            await room.changed.wait()
+            await room.wait_for_update()
 
 @strawberry.type
 class Mutation:
     @strawberry.field
     async def join(name: str) -> str:
-        _uuid = str(uuid.uuid4())
-        room.users.append(User(name=name, uuid=_uuid))
-        return _uuid
+        return room.add_user(name)
 
     @strawberry.field
     async def send_message(uuid: str, text: str) -> Room:
-        room.messages.append(Message(
-            time=datetime.now(),
-            sender=room.get_user_by_uuid(uuid),
-            text=text
-        ))
-        room.changed.set()
-        room.changed.clear()
-        return room
+        return room.add_message(uuid, text)
