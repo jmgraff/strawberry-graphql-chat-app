@@ -3,6 +3,9 @@
 Based on the template repo found here:
 https://github.com/jmgraff/fastapi-strawberry-urql
 
+An article explaining how the subscriptions work can be found here:
+https://codehammer.io/graphql-example-real-time-chat-app-using-subscriptions/
+
 This project illustratres how to use Subscriptions in GraphQL to create
 real-time web apps that don't need to use polling.
 
