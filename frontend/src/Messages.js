@@ -1,11 +1,10 @@
 import { useSubscription } from "urql";
 
-import "./Room.css";
+import "./Messages.css";
 
-const ROOM = `
+const MESSAGES = `
     subscription {
         room {
-            name
             messages {
                 sender {
                     name
@@ -25,8 +24,8 @@ function Message({sender, text}) {
     );
 }
 
-export default function Room() {
-    const [{data, fetching}] = useSubscription({query: ROOM}, (_, data) => data);
+export default function Messages() {
+    const [{data, fetching}] = useSubscription({query: MESSAGES}, (_, data) => data);
 
     if (fetching) {
         return (
@@ -34,22 +33,19 @@ export default function Room() {
         );
 
     } else {
-        let messages = [];
-        data?.room.messages.forEach((message) => {
-            messages.push(
-                <Message
-                    sender={message.sender.name}
-                    text={message.text}
-                    className="message"
-                />
-            );
-        });
-
         return (
             <div>
-                <h1>{data?.room.name}</h1>
                 <div id="messages">
-                    <div>{messages}</div>
+                    <div>
+                        {data?.room.messages.map((message, index) => (
+                            <Message
+                                key={index}
+                                sender={message.sender.name}
+                                text={message.text}
+                                className="message"
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         );
