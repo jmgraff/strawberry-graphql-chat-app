@@ -6,6 +6,9 @@ https://github.com/jmgraff/fastapi-strawberry-urql
 This project illustratres how to use Subscriptions in GraphQL to create
 real-time web apps that don't need to use polling.
 
+An article explaining the routing aspect of this branch can be found here:
+https://codehammer.io/react-how-to-add-routes-to-your-app-with-react-router-dom/
+
 ## Requiremets
 
 In order to run this, you'll need:
