@@ -35,9 +35,10 @@ export default function Room() {
 
     } else {
         let messages = [];
-        data?.room.messages.forEach((message) => {
+        data?.room.messages.forEach((message, index) => {
             messages.push(
                 <Message
+                    key={index}
                     sender={message.sender.name}
                     text={message.text}
                     className="message"
